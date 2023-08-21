@@ -1,11 +1,6 @@
 <script lang="ts" setup>
-
-const apiBase = 'http://localhost:8000';
-
-await useFetch(`${apiBase}/sanctum/csrf-cookie`, {
-  credentials: "include"
-});
-const token = useCookie('XSRF-TOKEN');
+import axios from "axios";
+import { ClienteStorePayload } from "@/types";
 
 const form = ref({
   nome: 'teste',
@@ -15,21 +10,16 @@ const form = ref({
   endereco: ''
 });
 
-const { estadosList } = await useFetch(`${apiBase}/api/estados`, {
-  credentials: "include",
-  method: "get",
-});
+async function handleSave(payload: any) {
+  try {
+    await save(payload);
+  } catch (err) {
+    handleInvalidForm(err);
+  }
+}
 
-
-async function save() {
-  await useFetch(`${apiBase}/api/cliente`, {
-    credentials: "include",
-    method: "POST",
-    body: form.value,
-    headers: {
-      'X-XSRF-TOKEN': token.value as string
-    }
-  });
+async function save(payload: ClienteStorePayload) {
+  await axios.post("/cliente", payload);
 }
 </script>
 
@@ -39,11 +29,11 @@ async function save() {
     <h1 class="text-xl text-indigo-600 pb-6">Cadastro Cliente</h1>
     <div class="flex justify-center flex-wrap mt-3">
       <div class="w-full lg:w-4/6 bg-white p-5 rounded-md shadow-md">
-        <form @submit.prevent="save">
+        <form @submit.prevent="handleSave">
           <div class="group-1">
             <div class="inline-block">
               <label for="cpf" class="text-normal font-bold text-gray-700">CPF: </label>
-              <input type="text" class="ml-2 mr-4 p-2 border-2 rounded-xl border-gray-600 sm:text-sm" v-model="form.cpf">
+              <input type="text" class="ml-2 mr-4 p-2 border-2 rounded-xl border-gray-600 sm:text-sm" v-model="form.cpf" required>
             </div>
             <div class="inline-block">
               <label for="nome" class="text-normal font-bold text-gray-700">Nome: </label>
@@ -87,6 +77,7 @@ async function save() {
               </select>      
             </div>
           </div>
+          <button class="btn">save</button>
         </form>
       </div>
     </div>

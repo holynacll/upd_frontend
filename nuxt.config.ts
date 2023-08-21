@@ -7,4 +7,14 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@formkit/nuxt',
   ],
+  runtimeConfig: {
+    public: {
+      appURL: "http://localhost:8000",
+    },
+  },
+  // ssr: false,
+  routeRules: {
+    "/**": { ssr: false },
+    "/profiles/**": { ssr: true },
+  },
 })
