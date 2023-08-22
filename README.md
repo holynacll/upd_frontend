@@ -1,10 +1,13 @@
+## to run (require Node v16.10.0 (essa versão e acima não deve dar problema))
+npm install
+npm run dev
+url: http://localhost:3000/
+
 # Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
-Require: Node v16.10.0 (essa versão e acima não deve dar problema)
-
 Make sure to install the dependencies:
 
 ```bash
