@@ -14,7 +14,7 @@
     "nuxt": "^3.6.5"
   },
   "dependencies": {
-    "@formkit/nuxt": "^0.18.3",
-    "@nuxtjs/tailwindcss": "^6.8.0"
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "laravel-vue-pagination": "^4.1.1"
   }
 }

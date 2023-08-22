@@ -5,16 +5,15 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',
-    '@formkit/nuxt',
   ],
+  tailwindcss: {
+    config: {
+      content: ["./node_modules/laravel-vue-pagination/**/*.vue"],
+    },
+  },
   runtimeConfig: {
     public: {
       appURL: "http://localhost:8000",
     },
-  },
-  // ssr: false,
-  routeRules: {
-    "/**": { ssr: false },
-    "/profiles/**": { ssr: true },
   },
 })

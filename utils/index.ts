@@ -1,8 +1,7 @@
-import { FormKitNode } from "@formkit/core";
 import { AxiosError } from "axios";
 
-export function handleInvalidForm(err: any, node?: FormKitNode) {
+export function handleInvalidForm(err: any, errors: any) {
   if (err instanceof AxiosError && err.response?.status === 422) {
-    node?.setErrors([], err.response.data.errors);
+    errors.value = err.response.data.errors;
   }
 }
